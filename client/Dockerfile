@@ -1,11 +1,13 @@
 FROM node:alpine
 
-WORKDIR /client/
+WORKDIR /app
 
-COPY public/ /client/public
-COPY package.json /client/
-COPY src/ /client/src/
-
+COPY package.json package-lock.json ./
 RUN npm install
+
+COPY . ./
+
+RUN npm run build
+EXPOSE 3000
 
 CMD ["npm","start"]
